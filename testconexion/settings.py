@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-sh@l1wtjdqbhsz1n^bwh78y67&y(0j_z+xg-m(36h@09yr=j%l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -80,8 +80,18 @@ WSGI_APPLICATION = 'testconexion.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
+
+
 import os
 from decouple import config
+from pathlib import Path
+
+# ... otras configuraciones ...
+
+DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = config('DJANGO_SECRET_KEY')
+
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
 DATABASES = {
     'default': {
@@ -89,10 +99,13 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASS'),
-        'HOST': config('DB_HOST'),  # ← esto puede ser tu IP pública o tu .no-ip.me
-        'PORT': '5432',
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
+
+# ... y demás settings que ya tengas ...
+
 
 
 
