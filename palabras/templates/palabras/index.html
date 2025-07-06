@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Palabras Remotas</title>
+</head>
+<body>
+    <h1>Guardar palabra</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="texto" placeholder="Escribí una palabra">
+        <button type="submit">Guardar</button>
+    </form>
+
+    {% if ultima %}
+        <h2>Última palabra guardada:</h2>
+        <p>{{ ultima.texto }}</p>
+    {% endif %}
+</body>
+</html>
